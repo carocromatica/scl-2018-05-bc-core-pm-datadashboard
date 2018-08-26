@@ -16,12 +16,20 @@ Promise.all([ // Ejecuta todas las llamadas de manera paralela.
 }).then((data) => { // Arreglo de respuestas en json.
   users = Object.values(data[0]); // se usa values porque id y name son values, si pongo keys sale undefined
   progress = Object.values(data[1]); // se usa values porque la propiedad intro está dentro del key ID
-  cohorts = Object.keys(data[2]);
+  cohorts = Object.values(data[2]);
 }).catch(
   () => {
     console.log('fallo fetch');
   }
 );
+
+
+function getCohort(){
+    
+  
+  console.log((cohorts[31]));
+}
+
 
 
 // FUNCION 1
@@ -154,8 +162,26 @@ function computeUsersStats() {
   
       };
   }
-   console.log(users);
+  
+
+
+    
+
+    cohorts[31] = {
+      ...cohorts[31],
+      cohortData:users,
+    };
+    
+ 
+    console.log(cohorts)
+  
+  
+  
+
 }
+
+
+
 //---------------------------------------------
   
 function filterUsers(search) {//venia en la documentacion de mozilla
@@ -243,9 +269,7 @@ function sortUsersName(orderDirection){ //venia en la documentacion de mozilla
 
   }
  
-  function getCohort(){
-    
-  }
+
 
 
  
