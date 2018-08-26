@@ -242,7 +242,6 @@ function sortUsersName(orderDirection){ //venia en la documentacion de mozilla
   console.log(sorted)
 
   }
-  
  
   function getCohort(){
     
