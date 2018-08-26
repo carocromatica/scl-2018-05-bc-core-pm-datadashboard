@@ -2,9 +2,6 @@ let users;
 let progress;
 let cohorts; //  todavía no uso cohorts, ya lo activaré más adelante
 
-//let students = [];
-
-
 let userId = {}; // se declara así porque hay usuarios vacios
 let userName = 0;
 let userPercent = 0;
@@ -131,7 +128,7 @@ function computeUsersStats() {
     });
 
     users[i] = {
-        ...users[i],  /// siempre sale error de codigo aqui
+       ...users[i],  /// siempre sale error de codigo aqui
         stats: {
           percent: userPercent,
           exercises: {
@@ -156,17 +153,6 @@ function computeUsersStats() {
         }
   
       };
-
-    // para visualizar en consola
-
-    // console.log(contador + ' // id: ' + userId);
-    // console.log('nombre: ' + userName);
-    // console.log('Lecturas Completadas: ' + readsCompleted + '/11');
-    // console.log('Ejecicios Completados: ' + practiceCompleted + '/2');
-    // console.log('Quizzes Completados: ' + quizCompleted + '/3');
-    // console.log('Promedio Quizes: ' + scoreAvg + '%');
-    // console.log('Completitud: ' + userPercent + '%');
-    // console.log('---------------------------------------');
   }
    console.log(users);
 }
@@ -176,7 +162,7 @@ function filterUsers(search) {//venia en la documentacion de mozilla
     return users.filter(function(element) {
         return element.name.toLowerCase().indexOf(search.toLowerCase()) > -1;
     })
-    console.log(filterUsers); 
+    
   }
   
 //----------------------------------------------
@@ -193,6 +179,58 @@ function sortUsersPercent(orderDirection){ //venia en la documentacion de mozill
   console.log(sorted)
   }
 
+
+  function sortExercices(orderDirection){ //venia en la documentacion de mozilla
+
+    if (orderDirection === 'ASC') {
+      sorted = users.sort((a, b) => a.stats.exercises.percent - b.stats.exercises.percent);
+    }
+    if (orderDirection === 'DESC') {
+      sorted = users.sort((a, b) => (a.stats.exercises.percent - b.stats.exercises.percent)*-1);
+    }
+    
+    console.log(sorted)
+    }
+
+
+
+    function sortReads(orderDirection){ //venia en la documentacion de mozilla
+
+      if (orderDirection === 'ASC') {
+        sorted = users.sort((a, b) => a.stats.reads.percent - b.stats.reads.percent);
+      }
+      if (orderDirection === 'DESC') {
+        sorted = users.sort((a, b) => (a.stats.reads.percent - b.stats.reads.percent)*-1);
+      }
+      
+      console.log(sorted)
+      }
+
+
+      function sortQuizz(orderDirection){ //venia en la documentacion de mozilla
+
+        if (orderDirection === 'ASC') {
+          sorted = users.sort((a, b) => a.stats.quizzes.percent - b.stats.quizzes.percent);
+        }
+        if (orderDirection === 'DESC') {
+          sorted = users.sort((a, b) => (a.stats.quizzes.percent - b.stats.quizzes.percent)*-1);
+        }
+        
+        console.log(sorted)
+        }
+  
+        function sortQuizzScore(orderDirection){ //venia en la documentacion de mozilla
+
+          if (orderDirection === 'ASC') {
+            sorted = users.sort((a, b) => a.stats.quizzes.scoreAvg - b.stats.quizzes.scoreAvg);
+          }
+          if (orderDirection === 'DESC') {
+            sorted = users.sort((a, b) => (a.stats.quizzes.scoreAvg - b.stats.quizzes.scoreAvg)*-1);
+          }
+          
+          console.log(sorted)
+          }
+
 function sortUsersName(orderDirection){ //venia en la documentacion de mozilla
 
   if (orderDirection === 'ASC') {
@@ -206,7 +244,9 @@ function sortUsersName(orderDirection){ //venia en la documentacion de mozilla
   }
   
  
-  
+  function getCohort(){
+    
+  }
 
 
  
@@ -215,18 +255,6 @@ function sortUsersName(orderDirection){ //venia en la documentacion de mozilla
 
 
 
-
-
-
-  // function printUsers() { // invento challa, quizas me sirva más adelante :D
-  //   let cosa = users.filter(function (users) {
-  //     let wea=(users.name)
-  //     let wea2=(users.stats)
-  //     console.log(wea, wea2);
-      
-  //   });
-    
-  //  };
 
 
 
