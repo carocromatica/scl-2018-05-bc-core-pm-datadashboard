@@ -24,26 +24,17 @@ Promise.all([ // Ejecuta todas las llamadas de manera paralela.
 );
 
 
-function getCohort(){
-    
-  
-  console.log((cohorts[31]));
-}
-
-
 
 // FUNCION 1
 function computeUsersStats() {
-
-  let contador = 0; // usé este contador porque tenia problemas con los recorridos, me sirve para controlar la cantidad de bucles
 
   for (i = 0; i < users.length; i++) { // recorrido que reconoce los id dentro de users
     userId = users[i].id; // obtiene id
     userName = users[i].name; // obtiene nombre
 
     userError = progress[i]; // para saltarse estudiantes con {} vacio
-    if (JSON.stringify(userError) === '{}') { 
-      
+    if (JSON.stringify(userError) === '{}') {
+
       users[i] = {
         ...users[i],
         stats: {
@@ -56,7 +47,7 @@ function computeUsersStats() {
           }
         }
       };
-      
+
       // convierte el json en texto plano
       continue;
     } // fin para saltarse {} vacio, el userError no se muestra en la data, equivale a las estudiantes que solo se registraron, pero no entraron al lms
@@ -68,23 +59,23 @@ function computeUsersStats() {
     let readsCompleted = 0;
     let quizzCompleted = 0;
     let practiceCompleted = 0;
-    let practiceTotal=0;
-    let quizzTotal=0;
-    let readsTotal=0;
- 
+    let practiceTotal = 0;
+    let quizzTotal = 0;
+    let readsTotal = 0;
+
     userProgress.forEach(course => { // course equivale a la propiedad 01-nombre curso, no puedo entrar de otra forma
       Object.values(course.parts).forEach(parts => { // dentro de course está la propiedad parts
         switch (parts.type) { // dentro de parts está type
-        case 'read': // si type equivale a read
-        if (parts.type === 'read') {
-            readsTotal++;
-           
+          case 'read': // si type equivale a read
+            if (parts.type === 'read') {
+              readsTotal++;
+
             }
-          if (parts.completed === 1) { // busca si el valor de completed es = 1 (equivale a leido)
-            readsCompleted++; // suma 1 por cada read encontrado
-            
-          }
-          
+            if (parts.completed === 1) { // busca si el valor de completed es = 1 (equivale a leido)
+              readsCompleted++; // suma 1 por cada read encontrado
+
+            }
+
         };
       });
     });
@@ -92,15 +83,15 @@ function computeUsersStats() {
     userProgress.forEach(coursequizz => { // idem al anterior
       Object.values(coursequizz.parts).forEach(parts => {
         switch (parts.type) {
-        case 'quiz':
-         if (parts.type === 'quiz') {
-           quizzTotal+=1;
-           
+          case 'quiz':
+            if (parts.type === 'quiz') {
+              quizzTotal += 1;
+
             }
-          if (parts.completed === 1) {
-            quizzCompleted++;
-         
-          }
+            if (parts.completed === 1) {
+              quizzCompleted++;
+
+            }
         };
       });
     });
@@ -108,8 +99,8 @@ function computeUsersStats() {
     // para sacar promedios de score de quiz
     let scoreSum = 0;
     let scoreAvg = 0;
-    
-   
+
+
     userProgress.forEach(quizzscore => {
       Object.values(quizzscore.parts).forEach(parts => {
         if (parts.score) {
@@ -120,144 +111,152 @@ function computeUsersStats() {
     });
 
     userProgress.forEach(coursepractice => { // idem a reads
-        
+
       Object.values(coursepractice.parts).forEach(parts => {
         switch (parts.type) {
-        case 'practice':
-          if (parts.type === 'practice') {
-            practiceTotal += 1;
-          }
-          if (parts.completed === 1) {
-            practiceCompleted++;
-          }
+          case 'practice':
+            if (parts.type === 'practice') {
+              practiceTotal += 1;
+            }
+            if (parts.completed === 1) {
+              practiceCompleted++;
+            }
           //console.log(coursepractice); 
         };
       });
     });
 
     users[i] = {
-       ...users[i],  /// siempre sale error de codigo aqui
-        stats: {
-          percent: userPercent,
-          exercises: {
-            total: practiceTotal,
-            completed: practiceCompleted,
-            percent: Math.round((practiceCompleted/practiceTotal)*100),
-          },
-  
-          reads: {
-            total: readsTotal,
-            completed: readsCompleted,
-            percent: Math.round((readsCompleted/readsTotal)*100),
-          },
-  
-          quizzes: {
-            total: quizzTotal,
-            completed: quizzCompleted,
-            percent: Math.round((quizzCompleted/quizzTotal)*100),
-            scoreSum: scoreSum,
-            scoreAvg: scoreAvg,
-          },
-        }
-  
-      };
-  }
-  
+      ...users[i],  /// siempre sale error de codigo aqui
+      stats: {
+        percent: userPercent,
+        exercises: {
+          total: practiceTotal,
+          completed: practiceCompleted,
+          percent: Math.round((practiceCompleted / practiceTotal) * 100),
+        },
 
+        reads: {
+          total: readsTotal,
+          completed: readsCompleted,
+          percent: Math.round((readsCompleted / readsTotal) * 100),
+        },
 
-    
+        quizzes: {
+          total: quizzTotal,
+          completed: quizzCompleted,
+          percent: Math.round((quizzCompleted / quizzTotal) * 100),
+          scoreSum: scoreSum,
+          scoreAvg: scoreAvg,
+        },
+      }
 
-    cohorts[31] = {
-      ...cohorts[31],
-      cohortData:users,
     };
-    
- 
-    console.log(cohorts)
-  
-  
-  
+  }
 
 }
 
+function getCohort(nombre){
+  let idcohort = cohorts.filter(cohorts => cohorts.id === nombre);//verifica el nombre del cohort
+  
+  for (j = 0; j < users.length; j++) {
+
+    cohortId = users[j].signupCohort;
+    
+    if (cohortId === nombre) {
+      cohorts = {
+        ...idcohort[0],
+        cohortData: users,
+      };
+
+
+    } else {
+      cohorts = {
+        ...idcohort[0],
+        cohortData: 'sin datos'
+      };
+    }
+  }
+  console.log(cohorts)
+}
 
 
 //---------------------------------------------
-  
+
 function filterUsers(search) {//venia en la documentacion de mozilla
-    return users.filter(function(element) {
-        return element.name.toLowerCase().indexOf(search.toLowerCase()) > -1;
-    })
-    
-  }
-  
+  return users.filter(function (element) {
+    return element.name.toLowerCase().indexOf(search.toLowerCase()) > -1;
+  })
+
+}
+
 //----------------------------------------------
 
-function sortUsersPercent(orderDirection){ //venia en la documentacion de mozilla
+function sortUsersPercent(orderDirection) { //venia en la documentacion de mozilla
 
   if (orderDirection === 'ASC') {
     sorted = users.sort((a, b) => a.stats.percent - b.stats.percent);
   }
   if (orderDirection === 'DESC') {
-    sorted = users.sort((a, b) => (a.stats.percent - b.stats.percent)*-1);
+    sorted = users.sort((a, b) => (a.stats.percent - b.stats.percent) * -1);
   }
-  
+
   console.log(sorted)
+}
+
+
+function sortExercices(orderDirection) { //venia en la documentacion de mozilla
+
+  if (orderDirection === 'ASC') {
+    sorted = users.sort((a, b) => a.stats.exercises.percent - b.stats.exercises.percent);
+  }
+  if (orderDirection === 'DESC') {
+    sorted = users.sort((a, b) => (a.stats.exercises.percent - b.stats.exercises.percent) * -1);
   }
 
-
-  function sortExercices(orderDirection){ //venia en la documentacion de mozilla
-
-    if (orderDirection === 'ASC') {
-      sorted = users.sort((a, b) => a.stats.exercises.percent - b.stats.exercises.percent);
-    }
-    if (orderDirection === 'DESC') {
-      sorted = users.sort((a, b) => (a.stats.exercises.percent - b.stats.exercises.percent)*-1);
-    }
-    
-    console.log(sorted)
-    }
+  console.log(sorted)
+}
 
 
 
-    function sortReads(orderDirection){ //venia en la documentacion de mozilla
+function sortReads(orderDirection) { //venia en la documentacion de mozilla
 
-      if (orderDirection === 'ASC') {
-        sorted = users.sort((a, b) => a.stats.reads.percent - b.stats.reads.percent);
-      }
-      if (orderDirection === 'DESC') {
-        sorted = users.sort((a, b) => (a.stats.reads.percent - b.stats.reads.percent)*-1);
-      }
-      
-      console.log(sorted)
-      }
+  if (orderDirection === 'ASC') {
+    sorted = users.sort((a, b) => a.stats.reads.percent - b.stats.reads.percent);
+  }
+  if (orderDirection === 'DESC') {
+    sorted = users.sort((a, b) => (a.stats.reads.percent - b.stats.reads.percent) * -1);
+  }
+
+  console.log(sorted)
+}
 
 
-      function sortQuizz(orderDirection){ //venia en la documentacion de mozilla
+function sortQuizz(orderDirection) { //venia en la documentacion de mozilla
 
-        if (orderDirection === 'ASC') {
-          sorted = users.sort((a, b) => a.stats.quizzes.percent - b.stats.quizzes.percent);
-        }
-        if (orderDirection === 'DESC') {
-          sorted = users.sort((a, b) => (a.stats.quizzes.percent - b.stats.quizzes.percent)*-1);
-        }
-        
-        console.log(sorted)
-        }
-  
-        function sortQuizzScore(orderDirection){ //venia en la documentacion de mozilla
+  if (orderDirection === 'ASC') {
+    sorted = users.sort((a, b) => a.stats.quizzes.percent - b.stats.quizzes.percent);
+  }
+  if (orderDirection === 'DESC') {
+    sorted = users.sort((a, b) => (a.stats.quizzes.percent - b.stats.quizzes.percent) * -1);
+  }
 
-          if (orderDirection === 'ASC') {
-            sorted = users.sort((a, b) => a.stats.quizzes.scoreAvg - b.stats.quizzes.scoreAvg);
-          }
-          if (orderDirection === 'DESC') {
-            sorted = users.sort((a, b) => (a.stats.quizzes.scoreAvg - b.stats.quizzes.scoreAvg)*-1);
-          }
-          
-          console.log(sorted)
-          }
+  console.log(sorted)
+}
 
-function sortUsersName(orderDirection){ //venia en la documentacion de mozilla
+function sortQuizzScore(orderDirection) { //venia en la documentacion de mozilla
+
+  if (orderDirection === 'ASC') {
+    sorted = users.sort((a, b) => a.stats.quizzes.scoreAvg - b.stats.quizzes.scoreAvg);
+  }
+  if (orderDirection === 'DESC') {
+    sorted = users.sort((a, b) => (a.stats.quizzes.scoreAvg - b.stats.quizzes.scoreAvg) * -1);
+  }
+
+  console.log(sorted)
+}
+
+function sortUsersName(orderDirection) { //venia en la documentacion de mozilla
 
   if (orderDirection === 'ASC') {
     sorted = users.sort((a, b) => a.name.localeCompare(b.name));
@@ -267,12 +266,12 @@ function sortUsersName(orderDirection){ //venia en la documentacion de mozilla
   }
   console.log(sorted)
 
-  }
- 
+}
 
 
 
- 
+
+
 
 
 
