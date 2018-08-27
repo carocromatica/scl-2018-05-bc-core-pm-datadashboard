@@ -23,10 +23,10 @@ Promise.all([ // Ejecuta todas las llamadas de manera paralela.
   }
 );
 
-
-
 // FUNCION 1
-function computeUsersStats() {
+function computeUsersStats(nombre) {
+
+  let idcohort = cohorts.filter(cohorts => cohorts.id === nombre);//verifica el nombre del cohort
 
   for (i = 0; i < users.length; i++) { // recorrido que reconoce los id dentro de users
     userId = users[i].id; // obtiene id
@@ -154,11 +154,8 @@ function computeUsersStats() {
     };
   }
 
-}
+// funcion que obtiene cohorts
 
-function getCohort(nombre){
-  let idcohort = cohorts.filter(cohorts => cohorts.id === nombre);//verifica el nombre del cohort
-  
   for (j = 0; j < users.length; j++) {
 
     cohortId = users[j].signupCohort;
@@ -170,7 +167,7 @@ function getCohort(nombre){
       };
 
 
-    } else {
+    } else{
       cohorts = {
         ...idcohort[0],
         cohortData: 'sin datos'
@@ -178,7 +175,9 @@ function getCohort(nombre){
     }
   }
   console.log(cohorts)
+
 }
+
 
 
 //---------------------------------------------
