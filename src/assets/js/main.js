@@ -14,3 +14,10 @@ function printUsers(data) {
   document.getElementById('tabla').innerHTML = tabla;
 
 }
+
+
+function printUsersnull() {
+
+console.log('sin datos disponibles')
+
+}

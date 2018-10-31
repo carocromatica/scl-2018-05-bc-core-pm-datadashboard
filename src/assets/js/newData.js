@@ -8,9 +8,9 @@ let userPercent = 0;
 let userProgress = 0; // variable que entra a la propiedad intro para sacar % de lecturas y demases
 
 Promise.all([ // Ejecuta todas las llamadas de manera paralela.
-  fetch('../data/cohorts/lim-2018-03-pre-core-pw/users.json'),
-  fetch('../data/cohorts/lim-2018-03-pre-core-pw/progress.json'),
-  fetch('../data/cohorts.json')
+  fetch('https://api.laboratoria.la/cohorts/lim-2018-03-pre-core-pw/users'),
+  fetch('https://api.laboratoria.la/cohorts/lim-2018-03-pre-core-pw/progress'),
+  fetch('https://api.laboratoria.la/cohorts')
 ]).then((responses) => { // Responde a todas las promesas.
   return Promise.all(responses.map((response => response.json()))); // traduce el "el texto plano" en JSON
 }).then((data) => { // Arreglo de respuestas en json.
@@ -166,18 +166,22 @@ function computeUsersStats(nombre) {
         cohortData: users,
       };
 
+      printUsers(users)
 
-    } else{
+
+    }  else{
       cohorts = {
         ...idcohort[0],
         cohortData: 'sin datos'
       };
+
+      printUsersnull()
     }
   }
   console.log(cohorts)
 
 
-  printUsers(users)
+ 
 
 
 }
