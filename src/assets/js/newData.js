@@ -8,17 +8,15 @@ let userPercent = 0;
 let userProgress = 0; // variable que entra a la propiedad intro para sacar % de lecturas y demases
 
 Promise.all([ // Ejecuta todas las llamadas de manera paralela.
-  fetch('https://api.laboratoria.la/cohorts/lim-2018-03-pre-core-pw/users'),
-  fetch('https://api.laboratoria.la/cohorts/lim-2018-03-pre-core-pw/progress'),
-  fetch('https://api.laboratoria.la/cohorts/')
+  fetch('../data/cohorts/lim-2018-03-pre-core-pw/users.json'),
+  fetch('../data/cohorts/lim-2018-03-pre-core-pw/progress.json'),
+  fetch('../data/cohorts.json')
 ]).then((responses) => { // Responde a todas las promesas.
   return Promise.all(responses.map((response => response.json()))); // traduce el "el texto plano" en JSON
 }).then((data) => { // Arreglo de respuestas en json.
   users = Object.values(data[0]); // se usa values porque id y name son values, si pongo keys sale undefined
   progress = Object.values(data[1]); // se usa values porque la propiedad intro está dentro del key ID
-  console.log(progress)
   cohorts = Object.values(data[2]);
-  console.log(cohorts)
 }).catch(
   () => {
     console.log('fallo fetch');
@@ -178,6 +176,10 @@ function computeUsersStats(nombre) {
   }
   console.log(cohorts)
 
+
+  printUsers(users)
+
+
 }
 
 
@@ -188,6 +190,8 @@ function filterUsers(search) {//venia en la documentacion de mozilla
   return users.filter(function (element) {
     return element.name.toLowerCase().indexOf(search.toLowerCase()) > -1;
   })
+
+  printUsers(users)
 
 }
 
@@ -203,6 +207,8 @@ function sortUsersPercent(orderDirection) { //venia en la documentacion de mozil
   }
 
   console.log(sorted)
+
+  printUsers(users)
 }
 
 
@@ -216,6 +222,8 @@ function sortExercices(orderDirection) { //venia en la documentacion de mozilla
   }
 
   console.log(sorted)
+  printUsers(users)
+
 }
 
 
@@ -230,6 +238,8 @@ function sortReads(orderDirection) { //venia en la documentacion de mozilla
   }
 
   console.log(sorted)
+
+  printUsers(users)
 }
 
 
@@ -243,6 +253,8 @@ function sortQuizz(orderDirection) { //venia en la documentacion de mozilla
   }
 
   console.log(sorted)
+
+  printUsers(users)
 }
 
 function sortQuizzScore(orderDirection) { //venia en la documentacion de mozilla
@@ -255,6 +267,8 @@ function sortQuizzScore(orderDirection) { //venia en la documentacion de mozilla
   }
 
   console.log(sorted)
+
+  printUsers(users)
 }
 
 function sortUsersName(orderDirection) { //venia en la documentacion de mozilla
@@ -267,17 +281,8 @@ function sortUsersName(orderDirection) { //venia en la documentacion de mozilla
   }
   console.log(sorted)
 
+  printUsers(users)
+
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
