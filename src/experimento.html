@@ -8,33 +8,83 @@
 
     <title>LABORATORIA DATA DASHBOARD</title>
 
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <!-- Compiled and minified JavaScript -->
     
- 
-
 </head>
 
-<body>
-    <button type="button" id="btnFilter" onclick="filterUsers()">Filtrar</button>
-    <input id="searchBox">
+<body class="grey lighten-5">
 
-    <button type="button" id="btnFilter" onclick="sortUsersName('ASC')">ordenar</button>
+    <nav class="yellow darken-1" role="navigation">
+        <div class="nav-wrapper container">
+            <a id="logo-container" href="#" class="brand-logo left black-text">Data Dashboard</a>
+            <ul id="slide-out" class="sidenav">
+                <li>
+                    <a href="home.html">
+                        <i class="material-icons amber-text text-darken-1">home</i> Home</a>
 
+                    <a href="saldo.html">
+                        <i class="material-icons amber-text text-darken-1">attach_money</i> Ver Saldo</a>
 
-    <table>
-            <thead>
-            <tr>
-                    <th>nombre</th>
-                    <td>porcentaje</td>
-                    <td>lecturas</td>
-                    <td>ejercicios</td>
-                    <td>quizzes</td>
-                    <td>promedioquizzes</td>
-                    </tr>
-                   </thead>
-<tbody id="tabla"></tbody>
-    </table>
+                    <a href="horarios.html">
+                        <i class="material-icons amber-text text-darken-1">account_balance_wallet</i> Calcular Tarifa</a>
+
+                    <a href="profile.html">
+                        <i class="material-icons amber-text text-darken-1">person</i> Perfil</a>
+
+                    <a href="faq.html">
+                        <i class="material-icons amber-text text-darken-1">help</i> Preguntas Frecuentes</a>
+
+                    <a href="index.html">
+                        <i class="material-icons amber-text text-darken-1">exit_to_app</i> Cerrar Sesión</a>
+                </li>
+            </ul>
+            <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large right">
+                <i class="material-icons black-text">menu</i>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+ <div id="loading"></div>
+
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s12 m3">
+                        <select>
+                            <option value="" disabled selected>Cohort</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                        <label>Selección</label>
+                    </div>
+                    <div class="input-field col s12 m9">
+                        <input id="filtro" placeholder="Nombre Alumna" type="text" class="validate" onkeyup="myFunction()">
+                        <label for="last_name">Búsqueda</label>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col s12 m12" id="tablota">
+               
+
+            
+            </div>
+        </div>
+    </div>
 
     <!--  js propios -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+    <script src="assets/js/sidenav.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="assets/js/newData.js"></script>
 

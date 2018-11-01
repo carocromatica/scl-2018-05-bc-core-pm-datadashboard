@@ -28,6 +28,9 @@ function computeUsersStats(nombre) {
 
   let idcohort = cohorts.filter(cohorts => cohorts.id === nombre);//verifica el nombre del cohort
 
+  const charge = document.getElementById("loading");
+  charge.style = "display: block;";
+
   for (i = 0; i < users.length; i++) { // recorrido que reconoce los id dentro de users
     userId = users[i].id; // obtiene id
     userName = users[i].name; // obtiene nombre
@@ -180,23 +183,23 @@ function computeUsersStats(nombre) {
   }
   console.log(cohorts)
 
-
- 
-
-
 }
-
 
 
 //---------------------------------------------
 
-function filterUsers(search) {//venia en la documentacion de mozilla
+function filterUsers() {//venia en la documentacion de mozilla
+
+  let search=document.getElementById("filtro").value;
   return users.filter(function (element) {
     return element.name.toLowerCase().indexOf(search.toLowerCase()) > -1;
+
+   
+
   })
 
-  printUsers(users)
 
+ 
 }
 
 //----------------------------------------------

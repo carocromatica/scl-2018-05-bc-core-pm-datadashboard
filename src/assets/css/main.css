@@ -1,0 +1,15 @@
+nav{
+  margin-bottom:20px;
+}
+
+.row{
+  margin-bottom:0px;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  
+body{
+  font-size: 12px;
+}
+  
+}
