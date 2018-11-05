@@ -1,7 +1,6 @@
 let users;
 let progress;
-let cohorts; //  todavía no uso cohorts, ya lo activaré más adelante
-
+let cohorts; 
 let userId = {}; // se declara así porque hay usuarios vacios
 let userName = 0;
 let userPercent = 0;
@@ -28,9 +27,7 @@ Promise.all([ // Ejecuta todas las llamadas de manera paralela.
     console.log('fallo fetch');
   }
 );
-
-
-// FUNCION 
+ 
  function computeUsersStats() {
 
   let cohort = document.getElementById("selector").value;
@@ -44,7 +41,7 @@ Promise.all([ // Ejecuta todas las llamadas de manera paralela.
     if (JSON.stringify(userError) === '{}') {
 
       users[i] = {
-        ...users[i],
+      ...users[i],
         stats: {
           percent: 0,
           exercises: { percent: 0, },
@@ -55,8 +52,6 @@ Promise.all([ // Ejecuta todas las llamadas de manera paralela.
           }
         }
       };
-
-      // convierte el json en texto plano
       continue;
     } // fin para saltarse {} vacio, el userError no se muestra en la data, equivale a las estudiantes que solo se registraron, pero no entraron al lms
 
@@ -77,13 +72,10 @@ Promise.all([ // Ejecuta todas las llamadas de manera paralela.
           case 'read': // si type equivale a read
             if (parts.type === 'read') {
               readsTotal++;
-
             }
             if (parts.completed === 1) { // busca si el valor de completed es = 1 (equivale a leido)
               readsCompleted++; // suma 1 por cada read encontrado
-
             }
-
         };
       });
     });
@@ -94,11 +86,9 @@ Promise.all([ // Ejecuta todas las llamadas de manera paralela.
           case 'quiz':
             if (parts.type === 'quiz') {
               quizzTotal += 1;
-
             }
             if (parts.completed === 1) {
               quizzCompleted++;
-
             }
         };
       });
@@ -107,7 +97,6 @@ Promise.all([ // Ejecuta todas las llamadas de manera paralela.
     // para sacar promedios de score de quiz
     let scoreSum = 0;
     let scoreAvg = 0;
-
 
     userProgress.forEach(quizzscore => {
       Object.values(quizzscore.parts).forEach(parts => {
@@ -129,7 +118,6 @@ Promise.all([ // Ejecuta todas las llamadas de manera paralela.
             if (parts.completed === 1) {
               practiceCompleted++;
             }
-          //console.log(coursepractice); 
         };
       });
     });
@@ -173,22 +161,16 @@ Promise.all([ // Ejecuta todas las llamadas de manera paralela.
         ...idcohort[0],
         cohortData: users,
       };
-
       printUsers(users)
-
 
     }  else{
       cohorts = {
         ...idcohort[0],
         cohortData: 'sin datos'
       };
-
       printUsersnull()
     }
   }
-  console.log(cohorts)
-  console.log(cohort + 'chan')
-
 }
 
 
