@@ -9,19 +9,20 @@ let userProgress = 0; // variable que entra a la propiedad intro para sacar % de
 
 loaded()
 
+
 Promise.all([ // Ejecuta todas las llamadas de manera paralela.
   fetch('https://api.laboratoria.la/cohorts/lim-2018-03-pre-core-pw/users'),
   fetch('https://api.laboratoria.la/cohorts/lim-2018-03-pre-core-pw/progress'),
   fetch('https://api.laboratoria.la/cohorts')
 ]).then((responses) => { // Responde a todas las promesas.
   return Promise.all(responses.map((response => response.json()))); // traduce el "el texto plano" en JSON
-  
 }).then((data) => { // Arreglo de respuestas en json.
   users = Object.values(data[0]); // se usa values porque id y name son values, si pongo keys sale undefined
   progress = Object.values(data[1]); // se usa values porque la propiedad intro está dentro del key ID
   cohorts = Object.values(data[2]);
 }).then(() => { 
   document.getElementById("tabla").innerHTML = "Base de datos cargada, ahora puedes llamar al cohort"
+
 }).catch(
   () => {
     console.log('fallo fetch');
