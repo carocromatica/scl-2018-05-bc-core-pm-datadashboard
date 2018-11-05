@@ -9,8 +9,8 @@ function printUsers(data) {
         <i class="material-icons" onclick="sortUsersName('ASC')">arrow_drop_up</i></th>
 
         <th>Lecturas 
-        <i class="material-icons" onclick="sortReads('DESC')">arrow_drop_down</i><
-        i class="material-icons" onclick="sortReads('ASC')">arrow_drop_up</i></th>
+        <i class="material-icons" onclick="sortReads('DESC')">arrow_drop_down</i>
+        <i class="material-icons" onclick="sortReads('ASC')">arrow_drop_up</i></th>
 
         <th>Ejercicios 
         <i class="material-icons" onclick="sortExercices('DESC')">arrow_drop_down</i>
