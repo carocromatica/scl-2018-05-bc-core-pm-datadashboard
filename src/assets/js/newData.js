@@ -191,14 +191,6 @@ Promise.all([ // Ejecuta todas las llamadas de manera paralela.
 }
 
 
-//---------------------------------------------
-
-function filterUsers() {//venia en la documentacion de mozilla
-  let search=document.getElementById("filtro").value;
-  return users.filter(function (element) {
-    return element.name.toLowerCase().indexOf(search.toLowerCase()) > -1;
-  })
-}
 
 //----------------------------------------------
 
