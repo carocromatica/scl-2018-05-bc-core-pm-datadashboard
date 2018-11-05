@@ -9,13 +9,6 @@ nav{
 
 
 
-
-
-.carga{
-  background-color: green;
-  position:absolute;
-}
-
 @media (min-width: 320px) and (max-width: 480px) {
   
 body{

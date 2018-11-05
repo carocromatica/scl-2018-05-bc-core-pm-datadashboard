@@ -18,7 +18,7 @@
 
 <body class="grey lighten-5">
 
-    <nav class="yellow darken-1" role="navigation">
+    <nav class="yellow" role="navigation">
         <div class="nav-wrapper container">
             <a id="logo-container" href="#" class="brand-logo left black-text">Data Dashboard</a>
             <ul id="slide-out" class="sidenav">
@@ -31,32 +31,28 @@
     </nav>
 
     <div class="container">
-
-         
-
- <div id="loading"></div>
-
         <div class="row">
             <form class="col s12">
                 <div class="row">
                     <div class="input-field col s12 m3 ">
+                            
                         <select id="selector" onchange="computeUsersStats()" >
-                            <option value="" disabled selected>Cohort</option>
+                            <option value="" disabled selected> Cohort</option>
                             <option value="lim-2018-03-pre-core-pw">lim-2018-03-pre-core-pw</option>
                         </select>
                         <label>Selección</label>
                     </div>
                     <div class="input-field col s12 m9">
-
-                        <input id="filtro" type="text" class="grey lighten-3" onkeyup="filterUsers()">
-                            <label for="last_name">Búsqueda Alumnas</label>
-
+                     
+                        <i class="material-icons  prefix">search</i> 
+                        <input id="filtro" type="text" class=" validate" onkeyup="filterUsers()">
+                            <label for="last_name"> Búsqueda Alumnas</label>
                     </div>
                 </div>
             </form>
         </div>
         <div class="row">
-            <div class="col s12 m12" id="tablota">
+            <div class="col s12 m12" id="tablahd">
                 <div class="col s12 m12" id="tabla">
 
             
