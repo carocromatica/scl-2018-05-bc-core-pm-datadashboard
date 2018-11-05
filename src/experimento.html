@@ -22,25 +22,7 @@
         <div class="nav-wrapper container">
             <a id="logo-container" href="#" class="brand-logo left black-text">Data Dashboard</a>
             <ul id="slide-out" class="sidenav">
-                <li>
-                    <a href="home.html">
-                        <i class="material-icons amber-text text-darken-1">home</i> Home</a>
-
-                    <a href="saldo.html">
-                        <i class="material-icons amber-text text-darken-1">attach_money</i> Ver Saldo</a>
-
-                    <a href="horarios.html">
-                        <i class="material-icons amber-text text-darken-1">account_balance_wallet</i> Calcular Tarifa</a>
-
-                    <a href="profile.html">
-                        <i class="material-icons amber-text text-darken-1">person</i> Perfil</a>
-
-                    <a href="faq.html">
-                        <i class="material-icons amber-text text-darken-1">help</i> Preguntas Frecuentes</a>
-
-                    <a href="index.html">
-                        <i class="material-icons amber-text text-darken-1">exit_to_app</i> Cerrar Sesión</a>
-                </li>
+               menu
             </ul>
             <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large right">
                 <i class="material-icons black-text">menu</i>
@@ -50,35 +32,42 @@
 
     <div class="container">
 
+         
+
  <div id="loading"></div>
 
         <div class="row">
             <form class="col s12">
                 <div class="row">
-                    <div class="input-field col s12 m3">
-                        <select>
+                    <div class="input-field col s12 m3 ">
+                        <select id="selector" onchange="computeUsersStats()" >
                             <option value="" disabled selected>Cohort</option>
-                            <option value="1">Option 1</option>
+                            <option value="lim-2018-03-pre-core-pw">lim-2018-03-pre-core-pw</option>
                             <option value="2">Option 2</option>
                             <option value="3">Option 3</option>
                         </select>
                         <label>Selección</label>
                     </div>
                     <div class="input-field col s12 m9">
-                        <input id="filtro" placeholder="Nombre Alumna" type="text" class="validate" onkeyup="myFunction()">
-                        <label for="last_name">Búsqueda</label>
+
+                        <input id="filtro" type="text" class="grey lighten-3" onkeyup="myFunction()">
+                            <label for="last_name">Búsqueda Alumnas</label>
+
                     </div>
                 </div>
             </form>
         </div>
         <div class="row">
             <div class="col s12 m12" id="tablota">
-               
+                <div class="col s12 m12" id="tabla">
 
             
             </div>
         </div>
     </div>
+
+
+
 
     <!--  js propios -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="

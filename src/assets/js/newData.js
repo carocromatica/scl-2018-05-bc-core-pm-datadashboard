@@ -7,29 +7,33 @@ let userName = 0;
 let userPercent = 0;
 let userProgress = 0; // variable que entra a la propiedad intro para sacar % de lecturas y demases
 
+loaded()
+
 Promise.all([ // Ejecuta todas las llamadas de manera paralela.
   fetch('https://api.laboratoria.la/cohorts/lim-2018-03-pre-core-pw/users'),
   fetch('https://api.laboratoria.la/cohorts/lim-2018-03-pre-core-pw/progress'),
   fetch('https://api.laboratoria.la/cohorts')
 ]).then((responses) => { // Responde a todas las promesas.
   return Promise.all(responses.map((response => response.json()))); // traduce el "el texto plano" en JSON
+  
 }).then((data) => { // Arreglo de respuestas en json.
   users = Object.values(data[0]); // se usa values porque id y name son values, si pongo keys sale undefined
   progress = Object.values(data[1]); // se usa values porque la propiedad intro está dentro del key ID
   cohorts = Object.values(data[2]);
+}).then(() => { 
+  document.getElementById("tabla").innerHTML = "Base de datos cargada, ahora puedes llamar al cohort"
 }).catch(
   () => {
     console.log('fallo fetch');
   }
 );
 
-// FUNCION 1
-function computeUsersStats(nombre) {
 
-  let idcohort = cohorts.filter(cohorts => cohorts.id === nombre);//verifica el nombre del cohort
+// FUNCION 
+ function computeUsersStats() {
 
-  const charge = document.getElementById("loading");
-  charge.style = "display: block;";
+  let cohort = document.getElementById("selector").value;
+  let idcohort = cohorts//.filter(cohorts => cohorts.id === cohort);//verifica el nombre del cohort
 
   for (i = 0; i < users.length; i++) { // recorrido que reconoce los id dentro de users
     userId = users[i].id; // obtiene id
@@ -163,7 +167,7 @@ function computeUsersStats(nombre) {
 
     cohortId = users[j].signupCohort;
     
-    if (cohortId === nombre) {
+    if (cohortId === cohort) {
       cohorts = {
         ...idcohort[0],
         cohortData: users,
@@ -182,6 +186,7 @@ function computeUsersStats(nombre) {
     }
   }
   console.log(cohorts)
+  console.log(cohort + 'chan')
 
 }
 
@@ -189,17 +194,10 @@ function computeUsersStats(nombre) {
 //---------------------------------------------
 
 function filterUsers() {//venia en la documentacion de mozilla
-
   let search=document.getElementById("filtro").value;
   return users.filter(function (element) {
     return element.name.toLowerCase().indexOf(search.toLowerCase()) > -1;
-
-   
-
   })
-
-
- 
 }
 
 //----------------------------------------------
@@ -212,9 +210,7 @@ function sortUsersPercent(orderDirection) { //venia en la documentacion de mozil
   if (orderDirection === 'DESC') {
     sorted = users.sort((a, b) => (a.stats.percent - b.stats.percent) * -1);
   }
-
   console.log(sorted)
-
   printUsers(users)
 }
 
@@ -234,7 +230,6 @@ function sortExercices(orderDirection) { //venia en la documentacion de mozilla
 }
 
 
-
 function sortReads(orderDirection) { //venia en la documentacion de mozilla
 
   if (orderDirection === 'ASC') {
@@ -245,7 +240,6 @@ function sortReads(orderDirection) { //venia en la documentacion de mozilla
   }
 
   console.log(sorted)
-
   printUsers(users)
 }
 
@@ -260,7 +254,6 @@ function sortQuizz(orderDirection) { //venia en la documentacion de mozilla
   }
 
   console.log(sorted)
-
   printUsers(users)
 }
 
@@ -274,7 +267,6 @@ function sortQuizzScore(orderDirection) { //venia en la documentacion de mozilla
   }
 
   console.log(sorted)
-
   printUsers(users)
 }
 
@@ -287,9 +279,10 @@ function sortUsersName(orderDirection) { //venia en la documentacion de mozilla
     sorted = users.sort((a, b) => a.name.localeCompare(b.name) * -1);
   }
   console.log(sorted)
-
   printUsers(users)
 
 }
+
+
 
 

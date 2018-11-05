@@ -1,11 +1,11 @@
 function printUsers(data) {
 
-let tablota='';
+  let tablota = '';
 
-tablota+=`  <table class="highlight white card">
+  tablota += `  <table class="highlight white card" id="myTable">
 <thead>
     <tr>
-        <th>Nombre</th>
+        <th onclick="sortUsersName('ASC')">Nombre</th>
         <th>Lecturas</th>
         <th>Ejercicios</th>
         <th>Quizzes</th>
@@ -15,37 +15,32 @@ tablota+=`  <table class="highlight white card">
 <tbody id="tabla"></tbody>
 </table>`;
 
-document.getElementById('tablota').innerHTML = tablota;
+  document.getElementById('tablota').innerHTML = tablota;
 
   let tabla = '';
   data.forEach(function(users) {
-
-
-    if (users.name==""){
-
-      tabla += 
-      `<tr>
+    if (users.name === '') {
+      tabla +=
+        `<tr>
       <td>SIN NOMBRE</td>
-
       <td>${users.stats.reads.percent}</td>
       <td>${users.stats.exercises.percent}</td>
       <td>${users.stats.quizzes.scoreAvg}</td>
       <td>${users.stats.percent}</td>
-      </tr>`; 
-
+      </tr>`;
     }
 
-    else{
-      tabla += 
-      `<tr>
+    else {
+      tabla +=
+        `<tr>
       <td>${users.name}</td>
 
       <td>${users.stats.reads.percent}</td>
       <td>${users.stats.exercises.percent}</td>
       <td>${users.stats.quizzes.scoreAvg}</td>
       <td>${users.stats.percent}</td>
-      </tr>`;   
-      
+      </tr>`;
+
     }
   });
   document.getElementById('tabla').innerHTML = tabla;
@@ -56,7 +51,7 @@ document.getElementById('tablota').innerHTML = tablota;
 function printUsersnull() {
 
 
-document.getElementById("tabla").innerHTML = "Datos no disponibles"
+  document.getElementById("tabla").innerHTML = "Datos no disponibles"
 }
 
 
@@ -74,6 +69,29 @@ function myFunction() {
       } else {
         tr[i].style.display = "none";
       }
-    }       
+    }
   }
 }
+
+
+function loaded() {
+
+  let tabla = '';
+
+  tabla += `    <div class="preloader-wrapper big active">
+  <div class="spinner-layer spinner-yellow-only">
+    <div class="circle-clipper left">
+      <div class="circle"></div>
+    </div><div class="gap-patch">
+      <div class="circle"></div>
+    </div><div class="circle-clipper right">
+      <div class="circle"></div>
+    </div>
+  </div>
+</div>`;
+
+  document.getElementById('tabla').innerHTML = tabla;
+}
+
+
+
