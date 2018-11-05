@@ -1,13 +1,12 @@
 let users;
 let progress;
-let cohorts; 
+let cohorts;
 let userId = {}; // se declara así porque hay usuarios vacios
 let userName = 0;
 let userPercent = 0;
 let userProgress = 0; // variable que entra a la propiedad intro para sacar % de lecturas y demases
 
 loaded()
-
 
 Promise.all([ // Ejecuta todas las llamadas de manera paralela.
   fetch('https://api.laboratoria.la/cohorts/lim-2018-03-pre-core-pw/users'),
@@ -19,29 +18,25 @@ Promise.all([ // Ejecuta todas las llamadas de manera paralela.
   users = Object.values(data[0]); // se usa values porque id y name son values, si pongo keys sale undefined
   progress = Object.values(data[1]); // se usa values porque la propiedad intro está dentro del key ID
   cohorts = Object.values(data[2]);
-}).then(() => { 
-  document.getElementById("tabla").innerHTML = "Base de datos cargada, ahora puedes llamar al cohort"
-
+}).then(() => {
+  document.getElementById("tabla").innerHTML = "Base de datos cargada, ahora puedes llamar al cohort";
 }).catch(
   () => {
+    document.getElementById("tabla").innerHTML = "Lo sentimos, no se pueden cargar los datos.Refresca la página.";
     console.log('fallo fetch');
-  }
-);
- 
- function computeUsersStats() {
+  });
+
+function computeUsersStats() {
 
   let cohort = document.getElementById("selector").value;
   let idcohort = cohorts//.filter(cohorts => cohorts.id === cohort);//verifica el nombre del cohort
-
   for (i = 0; i < users.length; i++) { // recorrido que reconoce los id dentro de users
     userId = users[i].id; // obtiene id
     userName = users[i].name; // obtiene nombre
-
     userError = progress[i]; // para saltarse estudiantes con {} vacio
     if (JSON.stringify(userError) === '{}') {
-
       users[i] = {
-      ...users[i],
+        ...users[i],
         stats: {
           percent: 0,
           exercises: { percent: 0, },
@@ -54,10 +49,8 @@ Promise.all([ // Ejecuta todas las llamadas de manera paralela.
       };
       continue;
     } // fin para saltarse {} vacio, el userError no se muestra en la data, equivale a las estudiantes que solo se registraron, pero no entraron al lms
-
     userPercent = progress[i].intro.percent; // obtiene porcentaje total, sin objets.values porque llega hasta ahi no más
     userProgress = Object.values(progress[i].intro.units); // aqui entro al objeto units, aplico object values porque tiene que hacer recorrido al interior de intro
-
     // js no puede leer el 01-nombre unidad, asi que uso foreach para entrar o al progress le pongo  Object.values(progress[i].intro.units.nombreUnidad
     let readsCompleted = 0;
     let quizzCompleted = 0;
@@ -65,39 +58,33 @@ Promise.all([ // Ejecuta todas las llamadas de manera paralela.
     let practiceTotal = 0;
     let quizzTotal = 0;
     let readsTotal = 0;
-
     userProgress.forEach(course => { // course equivale a la propiedad 01-nombre curso, no puedo entrar de otra forma
       Object.values(course.parts).forEach(parts => { // dentro de course está la propiedad parts
         switch (parts.type) { // dentro de parts está type
           case 'read': // si type equivale a read
             if (parts.type === 'read') {
               readsTotal++;
-            }
-            if (parts.completed === 1) { // busca si el valor de completed es = 1 (equivale a leido)
+            } if (parts.completed === 1) { // busca si el valor de completed es = 1 (equivale a leido)
               readsCompleted++; // suma 1 por cada read encontrado
             }
-        };
+          };
+        });
       });
-    });
-
     userProgress.forEach(coursequizz => { // idem al anterior
       Object.values(coursequizz.parts).forEach(parts => {
         switch (parts.type) {
           case 'quiz':
             if (parts.type === 'quiz') {
               quizzTotal += 1;
-            }
-            if (parts.completed === 1) {
+            } if (parts.completed === 1) {
               quizzCompleted++;
             }
-        };
+          };
+        });
       });
-    });
-
     // para sacar promedios de score de quiz
     let scoreSum = 0;
     let scoreAvg = 0;
-
     userProgress.forEach(quizzscore => {
       Object.values(quizzscore.parts).forEach(parts => {
         if (parts.score) {
@@ -106,21 +93,18 @@ Promise.all([ // Ejecuta todas las llamadas de manera paralela.
         }
       });
     });
-
     userProgress.forEach(coursepractice => { // idem a reads
-
       Object.values(coursepractice.parts).forEach(parts => {
         switch (parts.type) {
           case 'practice':
             if (parts.type === 'practice') {
               practiceTotal += 1;
-            }
-            if (parts.completed === 1) {
+            } if (parts.completed === 1) {
               practiceCompleted++;
             }
-        };
+          };
+        });
       });
-    });
 
     users[i] = {
       ...users[i],  /// siempre sale error de codigo aqui
@@ -131,13 +115,11 @@ Promise.all([ // Ejecuta todas las llamadas de manera paralela.
           completed: practiceCompleted,
           percent: Math.round((practiceCompleted / practiceTotal) * 100),
         },
-
         reads: {
           total: readsTotal,
           completed: readsCompleted,
           percent: Math.round((readsCompleted / readsTotal) * 100),
         },
-
         quizzes: {
           total: quizzTotal,
           completed: quizzCompleted,
@@ -146,24 +128,18 @@ Promise.all([ // Ejecuta todas las llamadas de manera paralela.
           scoreAvg: scoreAvg,
         },
       }
-
     };
   }
-
-// funcion que obtiene cohorts
-
+  // funcion que obtiene cohorts
   for (j = 0; j < users.length; j++) {
-
     cohortId = users[j].signupCohort;
-    
     if (cohortId === cohort) {
       cohorts = {
         ...idcohort[0],
         cohortData: users,
       };
       printUsers(users)
-
-    }  else{
+    } else {
       cohorts = {
         ...idcohort[0],
         cohortData: 'sin datos'
@@ -173,89 +149,60 @@ Promise.all([ // Ejecuta todas las llamadas de manera paralela.
   }
 }
 
+// FUNCIONES DE ORDEN ASCENDENTE Y DESCENDENTE
 
-
-//----------------------------------------------
-
-function sortUsersPercent(orderDirection) { //venia en la documentacion de mozilla
-
+function sortUsersPercent(orderDirection) { 
   if (orderDirection === 'ASC') {
     sorted = users.sort((a, b) => a.stats.percent - b.stats.percent);
-  }
-  if (orderDirection === 'DESC') {
+  } if (orderDirection === 'DESC') {
     sorted = users.sort((a, b) => (a.stats.percent - b.stats.percent) * -1);
   }
-  console.log(sorted)
   printUsers(users)
 }
 
-
-function sortExercices(orderDirection) { //venia en la documentacion de mozilla
-
+function sortExercices(orderDirection) { 
   if (orderDirection === 'ASC') {
     sorted = users.sort((a, b) => a.stats.exercises.percent - b.stats.exercises.percent);
-  }
-  if (orderDirection === 'DESC') {
+  } if (orderDirection === 'DESC') {
     sorted = users.sort((a, b) => (a.stats.exercises.percent - b.stats.exercises.percent) * -1);
   }
-
-  console.log(sorted)
   printUsers(users)
-
 }
 
-
-function sortReads(orderDirection) { //venia en la documentacion de mozilla
-
+function sortReads(orderDirection) { 
   if (orderDirection === 'ASC') {
     sorted = users.sort((a, b) => a.stats.reads.percent - b.stats.reads.percent);
-  }
-  if (orderDirection === 'DESC') {
+  } if (orderDirection === 'DESC') {
     sorted = users.sort((a, b) => (a.stats.reads.percent - b.stats.reads.percent) * -1);
   }
-
-  console.log(sorted)
   printUsers(users)
 }
 
-
-function sortQuizz(orderDirection) { //venia en la documentacion de mozilla
-
+function sortQuizz(orderDirection) { 
   if (orderDirection === 'ASC') {
     sorted = users.sort((a, b) => a.stats.quizzes.percent - b.stats.quizzes.percent);
-  }
-  if (orderDirection === 'DESC') {
+  } if (orderDirection === 'DESC') {
     sorted = users.sort((a, b) => (a.stats.quizzes.percent - b.stats.quizzes.percent) * -1);
   }
-
-  console.log(sorted)
   printUsers(users)
 }
 
-function sortQuizzScore(orderDirection) { //venia en la documentacion de mozilla
-
+function sortQuizzScore(orderDirection) { 
   if (orderDirection === 'ASC') {
     sorted = users.sort((a, b) => a.stats.quizzes.scoreAvg - b.stats.quizzes.scoreAvg);
-  }
-  if (orderDirection === 'DESC') {
+  } if (orderDirection === 'DESC') {
     sorted = users.sort((a, b) => (a.stats.quizzes.scoreAvg - b.stats.quizzes.scoreAvg) * -1);
   }
-
-  console.log(sorted)
   printUsers(users)
 }
 
 function sortUsersName(orderDirection) { //venia en la documentacion de mozilla
-
   if (orderDirection === 'ASC') {
     sorted = users.sort((a, b) => a.name.localeCompare(b.name));
-  }
-  if (orderDirection === 'DESC') {
+  } if (orderDirection === 'DESC') {
     sorted = users.sort((a, b) => a.name.localeCompare(b.name) * -1);
   }
-  console.log(sorted)
   printUsers(users)
-
 }
 
 
