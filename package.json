@@ -13,6 +13,7 @@
     },
     "dependencies": {
         "chai": "^4.1.2",
+        "chart.js": "^2.7.3",
         "eslint": "^4.19.1",
         "htmlhint": "^0.9.13",
         "mocha": "^5.1.1",
@@ -26,5 +27,7 @@
         "eslint-plugin-promise": "^3.8.0",
         "eslint-plugin-standard": "^3.1.0"
     },
-    "eslintIgnore": ["test/fixtures.js"]
+    "eslintIgnore": [
+        "test/fixtures.js"
+    ]
 }

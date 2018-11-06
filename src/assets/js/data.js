@@ -6,6 +6,14 @@ let userName = 0;
 let userPercent = 0;
 let userProgress = 0; // variable que entra a la propiedad intro para sacar % de lecturas y demases
 
+let totalUsers=0;
+let optimo=0;
+let bueno=0;
+let regular=0;
+let malo=0;
+let vacio=0;
+
+
 loaded()
 
 Promise.all([ // Ejecuta todas las llamadas de manera paralela.
@@ -106,6 +114,27 @@ function computeUsersStats() {
         });
       });
 
+
+
+
+
+
+    ///totales///
+
+    if (userPercent===100){
+     optimo++
+    }if(userPercent >=76 && userPercent<=99){
+      bueno++
+    }if(userPercent>=60){
+      regular++
+    }if(userPercent<=59 && userPercent>1){
+      malo++
+    }if(userPercent===0){
+      vacio++}
+
+    totalUsers++;
+
+
     users[i] = {
       ...users[i],  /// siempre sale error de codigo aqui
       stats: {
@@ -147,6 +176,16 @@ function computeUsersStats() {
       printUsersnull()
     }
   }
+
+
+  console.log(totalUsers);
+  console.log(optimo);
+  console.log(bueno);
+  console.log(regular);
+  console.log(malo);
+  console.log(vacio);
+
+
 }
 
 // FUNCIONES DE ORDEN ASCENDENTE Y DESCENDENTE

@@ -1,9 +1,17 @@
 function printUsers(data) {
   let tablahd = '';
   tablahd +=
-    `<table class="highlight white card" id="myTable">
+    `
+    <canvas id="myChart"></canvas>
+    <button onclick="tabla()">tabla</button>
+    <button onclick="chart()">resumen</button>
+    
+    
+    <table class="highlight white card" id="myTable">
     <thead class="grey lighten-3">
     <tr>
+
+    <th>valor</th>
         <th>Nombre
         <i class="material-icons" onclick="sortUsersName('DESC')">arrow_drop_down</i>
         <i class="material-icons" onclick="sortUsersName('ASC')">arrow_drop_up</i></th>
@@ -31,10 +39,12 @@ function printUsers(data) {
   document.getElementById('tablahd').innerHTML = tablahd;
 
   let tabla = '';
+  let valor=1;
   data.forEach(function(users) {
     if (users.name === '') {
       tabla +=
         `<tr>
+        <td>${valor++}</td>
             <td>SIN NOMBRE</td>
             <td>${users.stats.reads.percent}</td>
             <td>${users.stats.exercises.percent}</td>
@@ -44,6 +54,7 @@ function printUsers(data) {
     } else {
       tabla +=
         `<tr>
+        <td>${valor++}</td>
         <td>${users.name}</td>
         <td>${users.stats.reads.percent}</td>
         <td>${users.stats.exercises.percent}</td>

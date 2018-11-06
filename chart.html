@@ -5,79 +5,71 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
     <title>LABORATORIA DATA DASHBOARD</title>
-
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./src/assets/css/main.css">
     <!-- Compiled and minified JavaScript -->
-    
 </head>
 
 <body class="grey lighten-5">
-
-    <nav class="yellow darken-1" role="navigation">
+    <nav class="yellow" role="navigation">
         <div class="nav-wrapper container">
             <a id="logo-container" href="#" class="brand-logo left black-text">Data Dashboard</a>
             <ul id="slide-out" class="sidenav">
-               menu
+                menu
             </ul>
             <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large right">
                 <i class="material-icons black-text">menu</i>
             </a>
         </div>
     </nav>
-
     <div class="container">
-
-         
-
- <div id="loading"></div>
-
         <div class="row">
+
             <form class="col s12">
                 <div class="row">
                     <div class="input-field col s12 m3 ">
-                        <select id="selector" onchange="computeUsersStats()" >
-                            <option value="" disabled selected>Cohort</option>
+
+                        <select id="selector" onchange="computeUsersStats()">
+                            <option value="" disabled selected> Cohort</option>
                             <option value="lim-2018-03-pre-core-pw">lim-2018-03-pre-core-pw</option>
-                            <option value="2">Option 2</option>
-                            <option value="3">Option 3</option>
                         </select>
                         <label>Selección</label>
                     </div>
                     <div class="input-field col s12 m9">
-
-                        <input id="filtro" type="text" class="grey lighten-3" onkeyup="myFunction()">
-                            <label for="last_name">Búsqueda Alumnas</label>
-
+                        <i class="material-icons  prefix">search</i>
+                        <input id="filtro" type="text" class=" validate" onkeyup="filterUsers()">
+                        <label for="last_name"> Búsqueda Alumnas</label>
                     </div>
                 </div>
             </form>
         </div>
         <div class="row">
-            <div class="col s12 m12" id="tablota">
+            <div class="col s12 m12" id="tablahd">
                 <div class="col s12 m12" id="tabla">
-
-            
+                </div>
             </div>
         </div>
-    </div>
 
 
 
 
-    <!--  js propios -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
-    <script src="assets/js/sidenav.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/newData.js"></script>
+      
 
+        <!--  js propios -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+<script src="./src/assets/js/chart.js"></script>
+        
+        <script src="./src/assets/js/sidenav.js"></script>
+        <script src="./src/assets/js/main.js"></script>
+        <script src="./src/assets/js/data.js"></script>
 </body>
 
 </html>
