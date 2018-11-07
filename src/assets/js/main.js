@@ -71,14 +71,14 @@ document.getElementById('grafico').innerHTML = grafico;
  
 
 
-    if (users.stats.quizzes.scoreAvg >= 80) {
+    if (users.stats.quizzes.scoreAvg >= 80 && users.stats.percent === 100) {
       tabla +=
-        `<tr>
+        `<tr class="green accent-1">
             <td >${users.name}</td>
-            <td class="center-align green">${users.stats.reads.percent}</td>
-            <td class="center-align green">${users.stats.exercises.percent}</td>
-            <td class="center-align green">${users.stats.quizzes.scoreAvg}</td>
-            <td class="center-align green">${users.stats.percent}</td>
+            <td class="center-align green-text"><b>${users.stats.reads.percent}</b></td>
+            <td class="center-align green-text">${users.stats.exercises.percent}</td>
+            <td class="center-align green-text">${users.stats.quizzes.scoreAvg}</td>
+            <td class="center-align green-text">${users.stats.percent}</td>
       </tr>`;
     
     }
@@ -100,7 +100,7 @@ document.getElementById('grafico').innerHTML = grafico;
 }
 
 function printUsersnull() {
-  document.getElementById('tabla').innerHTML = 'Datos no disponibles';
+  document.getElementById('loaded').innerHTML = 'Datos no disponibles';
 }
 
 function filterUsers() {

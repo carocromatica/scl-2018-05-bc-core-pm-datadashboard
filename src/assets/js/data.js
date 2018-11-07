@@ -17,8 +17,8 @@ let vacio=0;
 loaded()
 
 Promise.all([ // Ejecuta todas las llamadas de manera paralela.
-  fetch('https://api.laboratoria.la/cohorts/lim-2018-03-pre-core-pw/users'),
-  fetch('https://api.laboratoria.la/cohorts/lim-2018-03-pre-core-pw/progress'),
+  fetch('https://api.laboratoria.la/cohorts/scl-2018-03-pre-core-pw/users'),
+  fetch('https://api.laboratoria.la/cohorts/scl-2018-03-pre-core-pw/progress'),
   fetch('https://api.laboratoria.la/cohorts')
 ]).then((responses) => { // Responde a todas las promesas.
   return Promise.all(responses.map((response => response.json()))); // traduce el "el texto plano" en JSON
@@ -38,6 +38,7 @@ function computeUsersStats() {
 
   let cohort = document.getElementById("selector").value;
   let idcohort = cohorts//.filter(cohorts => cohorts.id === cohort);//verifica el nombre del cohort
+  console.log(idcohort)
   for (i = 0; i < users.length; i++) { // recorrido que reconoce los id dentro de users
     userId = users[i].id; // obtiene id
     userName = users[i].name; // obtiene nombre
@@ -173,13 +174,7 @@ function computeUsersStats() {
         cohortData: users,
       };
       printUsers(users)
-    } else {
-      cohorts = {
-        ...idcohort[0],
-        cohortData: 'sin datos'
-      };
-      printUsersnull()
-    }
+    } 
   }
 
 
@@ -190,6 +185,8 @@ function computeUsersStats() {
   console.log(malo);
   console.log(vacio);
 
+
+  console.log(users)
 
 }
 
