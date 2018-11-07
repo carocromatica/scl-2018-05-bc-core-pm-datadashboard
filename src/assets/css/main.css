@@ -7,6 +7,10 @@ nav{
 }
 
 
+thead{
+  width: 100%;
+}
+
 @media (min-width: 320px) and (max-width: 480px) {
   
 body{

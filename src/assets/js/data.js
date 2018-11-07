@@ -41,6 +41,11 @@ function computeUsersStats() {
   for (i = 0; i < users.length; i++) { // recorrido que reconoce los id dentro de users
     userId = users[i].id; // obtiene id
     userName = users[i].name; // obtiene nombre
+
+    if (userName===''){
+      users[i].name='sin nombre'
+    }
+
     userError = progress[i]; // para saltarse estudiantes con {} vacio
     if (JSON.stringify(userError) === '{}') {
       users[i] = {

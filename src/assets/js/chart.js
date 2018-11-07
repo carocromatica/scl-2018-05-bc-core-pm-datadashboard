@@ -45,7 +45,7 @@ myChart = new Chart(ctx, {
 
 function tabla(){
   document.getElementById('myChart').style.display = "none";
-  document.getElementById("myTable").style.display = "block";
+  document.getElementById("myTable").style.display = "table";
 
 }
 

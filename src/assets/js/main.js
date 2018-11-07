@@ -1,11 +1,25 @@
 function printUsers(data) {
 
+
+
+  let grafico ='';
+
+  grafico +=
+  `
+  <canvas id="myChart"></canvas>
+
+  
+  
+`;
+
+document.getElementById('grafico').innerHTML = grafico;
+
+
   let botones= '';
   botones +=
     `
-    <canvas id="myChart"></canvas>
-    <button onclick="tabla()">tabla</button>
-    <button onclick="chart()">resumen</button>
+    <button onclick="tabla()" class="btn">tabla</button>
+    <button onclick="chart()" class="btn">resumen</button>
     
     
   `;
@@ -54,27 +68,33 @@ function printUsers(data) {
   let tabla = '';
 
   data.forEach(function(users) {
-    if (users.name === '') {
+ 
+
+
+    if (users.stats.quizzes.scoreAvg >= 80) {
       tabla +=
         `<tr>
-   
-            <td>SIN NOMBRE</td>
-            <td class="center-align">${users.stats.reads.percent}</td>
-            <td class="center-align">${users.stats.exercises.percent}</td>
-            <td class="center-align">${users.stats.quizzes.scoreAvg}</td>
-            <td class="center-align">${users.stats.percent}</td>
+            <td >${users.name}</td>
+            <td class="center-align green">${users.stats.reads.percent}</td>
+            <td class="center-align green">${users.stats.exercises.percent}</td>
+            <td class="center-align green">${users.stats.quizzes.scoreAvg}</td>
+            <td class="center-align green">${users.stats.percent}</td>
       </tr>`;
-    } else {
-      tabla +=
-        `<tr>
     
-        <td>${users.name}</td>
-        <td class="center-align">${users.stats.reads.percent}</td>
-        <td class="center-align">${users.stats.exercises.percent}</td>
-        <td class="center-align">${users.stats.quizzes.scoreAvg}</td>
-        <td class="center-align">${users.stats.percent}</td>
-      </tr>`;
     }
+    else {
+      tabla +=
+        `<tr>
+            <td >${users.name}</td>
+            <td class="center-align ">${users.stats.reads.percent}</td>
+            <td class="center-align ">${users.stats.exercises.percent}</td>
+            <td class="center-align ">${users.stats.quizzes.scoreAvg}</td>
+            <td class="center-align ">${users.stats.percent}</td>
+      </tr>`;
+    
+    }
+
+
   });
   document.getElementById('tabla').innerHTML = tabla;
 }
