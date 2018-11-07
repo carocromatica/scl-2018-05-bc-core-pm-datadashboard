@@ -27,10 +27,10 @@ Promise.all([ // Ejecuta todas las llamadas de manera paralela.
   progress = Object.values(data[1]); // se usa values porque la propiedad intro está dentro del key ID
   cohorts = Object.values(data[2]);
 }).then(() => {
-  document.getElementById("tabla").innerHTML = "Base de datos cargada, ahora puedes llamar al cohort";
+  document.getElementById("loaded").innerHTML = "Base de datos cargada, ahora puedes llamar al cohort";
 }).catch(
   () => {
-    document.getElementById("tabla").innerHTML = "Lo sentimos, no se pueden cargar los datos.Refresca la página.";
+    document.getElementById("loaded").innerHTML = "Lo sentimos, no se pueden cargar los datos.Refresca la página.";
     console.log('fallo fetch');
   });
 
@@ -192,6 +192,7 @@ function computeUsersStats() {
 
 function sortUsersPercent(orderDirection) { 
   if (orderDirection === 'ASC') {
+     document.getElementById("icono").innerHTML = "sort"
     sorted = users.sort((a, b) => a.stats.percent - b.stats.percent);
   } if (orderDirection === 'DESC') {
     sorted = users.sort((a, b) => (a.stats.percent - b.stats.percent) * -1);

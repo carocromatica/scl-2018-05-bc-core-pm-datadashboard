@@ -1,65 +1,78 @@
 function printUsers(data) {
-  let tablahd = '';
-  tablahd +=
+
+  let botones= '';
+  botones +=
     `
     <canvas id="myChart"></canvas>
     <button onclick="tabla()">tabla</button>
     <button onclick="chart()">resumen</button>
     
     
+  `;
+
+  document.getElementById('botones').innerHTML = botones;
+
+
+
+  let tablahd = '';
+  tablahd +=
+    `
+ 
+    
+    
     <table class="highlight white card" id="myTable">
     <thead class="grey lighten-3">
     <tr>
 
-    <th>valor</th>
+
         <th>Nombre
-        <i class="material-icons" onclick="sortUsersName('DESC')">arrow_drop_down</i>
-        <i class="material-icons" onclick="sortUsersName('ASC')">arrow_drop_up</i></th>
+        <i class="material-icons " onclick="sortUsersName('DESC')" id="down_name">arrow_drop_down</i>
+        <i class="material-icons " onclick="sortUsersName('ASC')" id="up_name">arrow_drop_up</i></th>
 
-        <th>Lecturas 
-        <i class="material-icons" onclick="sortReads('DESC')">arrow_drop_down</i>
-        <i class="material-icons" onclick="sortReads('ASC')">arrow_drop_up</i></th>
+        <th class="center-align">Lecturas 
+        <i class="material-icons " onclick="sortReads('DESC')">arrow_drop_down</i>
+        <i class="material-icons " onclick="sortReads('ASC')">arrow_drop_up</i></th>
 
-        <th>Ejercicios 
-        <i class="material-icons" onclick="sortExercices('DESC')">arrow_drop_down</i>
-        <i class="material-icons" onclick="sortExercices('ASC')">arrow_drop_up</i></th>
+        <th class="center-align">Ejercicios  
+        <i class="material-icons " onclick="sortExercices('DESC')">arrow_drop_down</i>
+        <i class="material-icons " onclick="sortExercices('ASC')">arrow_drop_up</i></th>
 
-        <th>Quizzes 
-        <i class="material-icons" onclick="sortQuizzScore('DESC')">arrow_drop_down</i>
-        <i class="material-icons" onclick="sortQuizzScore('ASC')">arrow_drop_up</i></th>
+        <th class="center-align">Quizzes 
+        <i class="material-icons " onclick="sortQuizzScore('DESC')">arrow_drop_down</i>
+        <i class="material-icons " onclick="sortQuizzScore('ASC')">arrow_drop_up</i></th>
 
-        <th>Total 
-        <i class="material-icons" onclick="sortUsersPercent('DESC')">arrow_drop_down</i>
-        <i class="material-icons" onclick="sortUsersPercent('ASC')">arrow_drop_up</i></th>
+        <th class="center-align">Total 
+        <i class="material-icons " onclick="sortUsersPercent('DESC')" id="icono">arrow_drop_down</i>
+        <i class="material-icons " onclick="sortUsersPercent('ASC')" id="icono">arrow_drop_up</i></th>
     </tr>
     </thead>
     <tbody id="tabla"></tbody>
     </table>`;
 
-  document.getElementById('tablahd').innerHTML = tablahd;
+  document.getElementById('loaded').innerHTML = tablahd;
 
   let tabla = '';
-  let valor=1;
+
   data.forEach(function(users) {
     if (users.name === '') {
       tabla +=
         `<tr>
-        <td>${valor++}</td>
+   
             <td>SIN NOMBRE</td>
-            <td>${users.stats.reads.percent}</td>
-            <td>${users.stats.exercises.percent}</td>
-            <td>${users.stats.quizzes.scoreAvg}</td>
-            <td>${users.stats.percent}</td>
+            <td class="center-align">${users.stats.reads.percent}</td>
+            <td class="center-align">${users.stats.exercises.percent}</td>
+            <td class="center-align">${users.stats.quizzes.scoreAvg}</td>
+            <td class="center-align">${users.stats.percent}</td>
       </tr>`;
     } else {
       tabla +=
         `<tr>
-        <td>${valor++}</td>
+    
         <td>${users.name}</td>
-        <td>${users.stats.reads.percent}</td>
-        <td>${users.stats.exercises.percent}</td>
-        <td>${users.stats.quizzes.scoreAvg}</td>
-        <td>${users.stats.percent}</td>
+        <td class="center-align">${users.stats.reads.percent}</td>
+        <td class="center-align">${users.stats.exercises.percent}</td>
+        <td class="center-align">${users.stats.quizzes.scoreAvg}</td>
+        <td class="center-align">${users.stats.percent}</td>
       </tr>`;
     }
   });
@@ -89,10 +102,10 @@ function filterUsers() {
 }
 
 function loaded() {
-  let tabla = '';
-  tabla += 
+  let loaded = '';
+  loaded += 
   `<div class="progress yellow">
     <div class="indeterminate  yellow darken-3"></div>
   </div>`;
-  document.getElementById('tabla').innerHTML = tabla;
+  document.getElementById('loaded').innerHTML = loaded;
 }

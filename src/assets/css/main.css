@@ -12,5 +12,13 @@ nav{
 body{
   font-size: 12px;
 }
+
+th{
+  width: 20%;
+}
+
+td{
+  width: 20%;
+}
   
 }
