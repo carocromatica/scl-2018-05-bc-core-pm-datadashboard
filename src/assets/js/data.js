@@ -6,12 +6,6 @@ let userName = 0;
 let userPercent = 0;
 let userProgress = 0; // variable que entra a la propiedad intro para sacar % de lecturas y demases
 
-
-
-
-
-
-
 function computeUsersStats() {
 
 
