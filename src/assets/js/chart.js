@@ -1,12 +1,12 @@
 
-function chart(){
+function chart(optimo,bueno,regular,malo){
 
-var ctx = document.getElementById('myChart').getContext('2d');
+let ctx = document.getElementById('myChart').getContext('2d');
 
 document.getElementById('myChart').style.display = "block";
 document.getElementById("myTable").style.display = "none";
 myChart = new Chart(ctx, {
-  type: 'doughnut',
+  type: 'bar',
   data: {
     labels: ['Optimo', 'Bueno', 'Regular', 'Malo'],
     datasets: [{

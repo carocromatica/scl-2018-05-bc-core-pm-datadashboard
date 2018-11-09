@@ -15,16 +15,7 @@ function printUsers(data) {
 document.getElementById('grafico').innerHTML = grafico;
 
 
-  let botones= '';
-  botones +=
-    `
-    <button onclick="tabla()" class="btn">tabla</button>
-    <button onclick="chart()" class="btn">resumen</button>
-    
-    
-  `;
-
-  document.getElementById('botones').innerHTML = botones;
+  
 
 
 
@@ -32,7 +23,8 @@ document.getElementById('grafico').innerHTML = grafico;
   tablahd +=
     `
  
-    
+    <button onclick="tabla()" class="btn">ver tabla</button>
+    <button onclick="chart()" class="btn">ver gráficos</button>
     
     <table class="highlight white card" id="myTable">
     <thead class="grey lighten-3">
